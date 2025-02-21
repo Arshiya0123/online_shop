@@ -1,3 +1,42 @@
                          Create and Build a Dock
 The Dockerfile is a text file that contains instructions for Docker to build an image for your application
 
+
+ Base image
+ FROM node:18-slim
+ 
+# working directory
+WORKDIR /app
+  
+# copy package.json
+COPY  package*.json ./
+
+
+# Install all dependencies(including vite) 
+RUN npm install
+
+# copy the rest of app's code
+COPY . .
+
+# Expose the running port 
+EXPOSE 3000
+
+# serve the app
+CMD ["npm","run","dev"]
+
+                              
+                              Explanation of Each Step 
+FROM node:18-slim          the first step is FROM in it i use node:18-slim which is the average size 
+ WORKDIR /app              the second step is working directory in which the application file is stored
+COPY  package*.json .      copy the package json in the working directory
+RUN npm install             install the node.js dependency
+COPY . .                     copy into source code
+EXPOSE 3000                  port at 3000
+CMD ["npm","run","dev"]       Define the container to run the application
+
+
+
+
+
+
+
